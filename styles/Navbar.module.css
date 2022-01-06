@@ -60,6 +60,7 @@
   color: white;
 }
 
+/* ORDER NOW! Message */
 .text:first-child {
   font-size: 12px;
   font-weight: 500;
@@ -68,11 +69,13 @@
   padding: 4px;
 }
 
+
 .text:last-child {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   clear: left;
-
+  letter-spacing: 0.1rem;
+  padding-top: 7px;
 }
 
 .list {
