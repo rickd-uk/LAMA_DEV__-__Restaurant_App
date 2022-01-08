@@ -1,38 +1,58 @@
+import axios from 'axios'
 import styles from '../../styles/Product.module.css'
 import Image from 'next/image'
 import { useState } from 'react'
 
-const Product = () => {
+const Product = ({ product }) => {
+	const [price, setPrice] = useState(product.prices[0])
 	const [size, setSize] = useState(0)
-	const pizza = {
-		id: 1,
-		img: '/img/pizza.png',
-		name: 'CAMPAGNOLA',
-		price: [19.9, 23.9, 27.8],
-		desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod sunt blanditiis fuga magnam cupiditate nihil dolore nam nisi tempore corporis.',
+	const [quantity, setQuantity] = useState(1)
+	const [extras, setExtras] = useState([])
+
+	const changePrice = (number) => {
+		setPrice(price + number)
 	}
+
+	const handleSize = (sizeIndex) => {
+		const difference = product.prices[sizeIndex] - product.prices[size]
+		setSize(sizeIndex)
+		changePrice(difference)
+	}
+
+	const handleChange = (e, option) => {
+		const checked = e.target.checked
+
+		if (checked) {
+			changePrice(option.price)
+			setExtras((prev) => [...prev, option])
+		} else {
+			changePrice(-option.price)
+			setExtras(extras.filter((extra) => extra._id !== option._id))
+		}
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.left}>
 				<div className={styles.imgContainer}>
-					<Image src={pizza.img} layout='fill' alt='' objectFit='contain' />
+					<Image src={product.img} layout='fill' alt='' objectFit='contain' />
 				</div>
 			</div>
 			<div className={styles.right}>
-				<h1 className={styles.title}>{pizza.name}</h1>
-				<span className={styles.price}>${pizza.price[size]}</span>
-				<p className={styles.desc}>{pizza.desc}</p>
+				<h1 className={styles.title}>{product.title}</h1>
+				<span className={styles.price}>${price}</span>
+				<p className={styles.desc}>{product.desc}</p>
 				<h3 className={styles.choose}>Choose your size</h3>
 				<div className={styles.sizes}>
-					<div className={styles.size} onClick={() => setSize(0)}>
+					<div className={styles.size} onClick={() => handleSize(0)}>
 						<Image src='/img/size.png' alt='' layout='fill' />
 						<span className={styles.sizeTitle}>Small</span>
 					</div>
-					<div className={styles.size} onClick={() => setSize(1)}>
+					<div className={styles.size} onClick={() => handleSize(1)}>
 						<Image src='/img/size.png' alt='' layout='fill' />
 						<span className={styles.sizeTitle}>Medium</span>
 					</div>
-					<div className={styles.size} onClick={() => setSize(2)}>
+					<div className={styles.size} onClick={() => handleSize(2)}>
 						<Image src='/img/size.png' alt='' layout='fill' />
 						<span className={styles.sizeTitle}>Large</span>
 					</div>
@@ -40,30 +60,42 @@ const Product = () => {
 
 				<h3 cl={styles.choose}>Choose additional ingredients</h3>
 				<div className={styles.ingredients}>
-					<div className={styles.option}>
-						<input className={styles.checkbox} type='checkbox' id='double' name='double' />
-						<label htmlFor='double'>Double Ingredients</label>
-					</div>
-					<div className={styles.option}>
-						<input className={styles.checkbox} type='checkbox' id='cheese' name='cheese' />
-						<label htmlFor='cheese'>Extra Cheese</label>
-					</div>
-					<div className={styles.option}>
-						<input className={styles.checkbox} type='checkbox' id='spicy' name='spicy' />
-						<label htmlFor='spicy'>Make it spicy!</label>
-					</div>
-					<div className={styles.option}>
-						<input className={styles.checkbox} type='checkbox' id='garlic' name='garlic' />
-						<label htmlFor='garlic'>Garlic Sauce</label>
-					</div>
+					{product.extraOpts.map((option) => (
+						<div className={styles.option} key={option._id}>
+							<input
+								className={styles.checkbox}
+								type='checkbox'
+								id={option.text}
+								name={option.text}
+								onChange={(e) => handleChange(e, option)}
+							/>
+							<label htmlFor={option.text}>{option.text}</label>
+						</div>
+					))}
 				</div>
 				<div className={styles.add}>
-					<input type='number' defaultValue={1} className={styles.quantity} />
+					<input
+						onChange={(e) => setQuantity(e.target.value)}
+						type='number'
+						defaultValue={1}
+						min={1}
+						max={10}
+						className={styles.quantity}
+					/>
 					<button className={styles.button}>Add to Cart</button>
 				</div>
 			</div>
 		</div>
 	)
+}
+
+export const getServerSideProps = async ({ params }) => {
+	const res = await axios.get(`http://localhost:3000/api/products/${params.id}`)
+	return {
+		props: {
+			product: res.data,
+		},
+	}
 }
 
 export default Product
