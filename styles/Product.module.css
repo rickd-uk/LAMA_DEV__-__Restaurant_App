@@ -67,13 +67,14 @@
 .ingredients {
   display: flex;
   margin-bottom: 30px;
+
 }
 
 .option {
   display: flex;
   align-items: center;
   margin-right: 10px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -99,4 +100,46 @@
   border: none;
   font-weight: 600;
   cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    height: auto;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .imgContainer {
+    width: 70vw;
+    height: 50vh;
+  }
+
+  .title {
+    margin: 5px;
+  }
+
+  .sizes {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .ingredients {
+    flex-direction: column;
+    margin-left: 40px;
+  }
+
+  .option {
+    margin: 10px;
+  }
+
+  .checkbox {
+    width: 30px;
+    height: 30px;
+  }
+
+  .quantity,
+  .button {
+    height: 50px;
+    padding: 10px 20px;
+  }
 }

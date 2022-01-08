@@ -90,3 +90,13 @@
   margin: 20px;
   font-weight: 400;
 }
+
+@media screen and (max-width:480px) {
+  .item:nth-child(2) {
+    display: none;
+  }
+
+  .item:nth-child(1) {
+    flex: 3;
+  }
+}

@@ -61,3 +61,66 @@
   cursor: pointer;
   margin-top: 30px;
 }
+
+@media screen and (max-width: 480px) {
+  .container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tableTitle {
+    display: none;
+  }
+
+  .tableItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .imgContainer {
+    width: 45vw;
+    height: 25vh;
+
+  }
+
+  .name,
+  .totalPrice {
+    font-size: 28px;
+  }
+
+  .extras,
+  .price,
+  .quantity,
+  .total {
+    font-size: 22px;
+  }
+
+  .quantity::before {
+    content: "Quantity: ";
+    font-weight: bold;
+  }
+
+  .price::before {
+    content: "Price: ";
+    font-weight: bold;
+  }
+
+  .total::before {
+    content: "Total: ";
+    font-weight: bold;
+  }
+
+  .wrapper {
+    width: 100%;
+  }
+}
