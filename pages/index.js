@@ -9,11 +9,6 @@ import ProductList from '../components/ProductList'
 export default function Home() {
 	return (
 		<div className={styles.container}>
-			<Head>
-				<title>Pizza Restaurant</title>
-				<meta name='description' content='Great pizza place' />
-				<link rel='icon' href='/favicon.ico' />
-			</Head>
 			<Featured />
 			<ProductList />
 		</div>
