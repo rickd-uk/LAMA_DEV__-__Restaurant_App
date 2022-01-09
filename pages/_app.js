@@ -1,17 +1,17 @@
 import Layout from '../components/Layout'
 import '../styles/globals.css'
-import Head from 'next/head'
+import { HeadTag as Head } from './Head'
+import store from '../redux/store'
+import { Provider } from 'react-redux'
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<Layout>
-			<Head>
-				<title>Pizza Restaurant</title>
-				<meta name='description' content='Great pizza place' />
-				<link rel='icon' href='/pizza.ico' />
-			</Head>
-			<Component {...pageProps} />
-		</Layout>
+		<Provider store={store}>
+			<Layout>
+				<Head />
+				<Component {...pageProps} />
+			</Layout>
+		</Provider>
 	)
 }
 
