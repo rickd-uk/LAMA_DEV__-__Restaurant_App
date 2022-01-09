@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 
+import OrderDetails from '../components/OrderDetails'
+
 import { useRouter } from 'next/router'
 import { reset } from '../redux/cartSlice'
 
 const Cart = () => {
 	const cart = useSelector((state) => state.cart)
 	const [open, setOpen] = useState(false)
+	const [cash, setCash] = useState(false)
 
 	const amount = cart.total.toFixed(2)
 	const currency = 'USD'
@@ -149,7 +152,10 @@ const Cart = () => {
 
 					{open ? (
 						<div className={styles.paymentMethods}>
-							<button className={styles.payButton}> CASH ON DELIVERY</button>
+							<button onClick={() => setCash(true)} className={styles.payButton}>
+								{' '}
+								CASH ON DELIVERY
+							</button>
 							<PayPalScriptProvider
 								options={{
 									'client-id': 'AfJScJuWuJRXSUIn6aoqRLc79cCEWlkCq9orINNdx5V81cM4nnrcnlSe-BKXmaKqDSomVCzfgYSVjUAr',
@@ -167,6 +173,7 @@ const Cart = () => {
 					)}
 				</div>
 			</div>
+			{cash && <OrderDetails total={cart.total} createOrder={createOrder} />}
 		</div>
 	)
 }
