@@ -2,9 +2,11 @@ import styles from '../styles/Navbar.module.css'
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const Navbar = () => {
 	const quantity = useSelector((state) => state.cart.quantity)
+	const router = useRouter()
 
 	return (
 		<div className={styles.container}>
@@ -21,7 +23,9 @@ const Navbar = () => {
 			</div>
 			<div className={styles.item}>
 				<ul className={styles.list}>
-					<li className={styles.listItem}>Home</li>
+					<Link href='/'>
+						<li className={styles.listItem}>Home</li>
+					</Link>
 					<li className={styles.listItem}>Products</li>
 					<li className={styles.listItem}>Menu</li>
 					<Image src='/img/logo.png' alt='' width='160px' height='69px' />

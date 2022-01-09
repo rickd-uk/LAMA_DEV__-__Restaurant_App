@@ -9,13 +9,11 @@ const Featured = () => {
 		if (direction == 'left') {
 			setIndex(index <= 0 ? images.length - 1 : index - 1)
 		} else if (direction == 'right') {
-			console.log(index)
 			setIndex(index >= images.length - 1 ? 0 : index + 1)
 		}
 	}
 
 	const [index, setIndex] = useState(0)
-	console.log(index)
 
 	return (
 		<div className={styles.container}>

@@ -55,11 +55,12 @@
 }
 
 .button {
-  height: 30px;
+  height: 40px;
   color: orange;
   font-weight: bold;
   cursor: pointer;
   margin-top: 30px;
+  border-radius: 5px;
 }
 
 @media screen and (max-width: 480px) {
@@ -123,4 +124,22 @@
   .wrapper {
     width: 100%;
   }
+}
+
+.paymentMethods {
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+}
+
+.payButton {
+  padding: 5px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  background-color: white;
+  color: teal;
+  font-weight: bold;
+  border-radius: 5px;
+  height: 40px;
+
 }

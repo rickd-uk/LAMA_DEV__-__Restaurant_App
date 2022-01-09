@@ -4,13 +4,13 @@ const OrderSchema = new mongoose.Schema(
 	{
 		customer: {
 			type: String,
-			maxLength: 60,
 			required: true,
+			maxlength: 60,
 		},
-		addr: {
+		address: {
 			type: String,
-			maxLength: 200,
 			required: true,
+			maxlength: 200,
 		},
 		total: {
 			type: Number,
@@ -20,7 +20,7 @@ const OrderSchema = new mongoose.Schema(
 			type: Number,
 			default: 0,
 		},
-		paymentMethod: {
+		method: {
 			type: Number,
 			required: true,
 		},
