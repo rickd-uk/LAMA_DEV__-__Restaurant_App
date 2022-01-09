@@ -1,0 +1,34 @@
+.container {
+  padding: 50px;
+  display: flex;
+
+}
+
+.item {
+  flex: 1;
+
+}
+
+.table {
+  width: 100%;
+  border-spacing: 20px;
+
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+
+.buttonNextStage,
+.buttonEdit {
+  background-color: teal;
+}
+
+.buttonDelete {
+  background-color: crimson;
+}
